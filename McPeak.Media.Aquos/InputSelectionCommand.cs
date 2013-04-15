@@ -8,12 +8,11 @@ namespace McPeak.Media.Aquos
     public class InputSelectionCommand : AquosCommand
     {
         private const string COMMAND_STR = "IAVD";
-        private readonly Selection _selection;
         
         private InputSelectionCommand(Selection selection)
             : base(COMMAND_STR)
         {
-            _selection = selection;
+            Parms = Convert.ToString((int) selection).PadRight(8);
         }
 
         public static InputSelectionCommand Hdmi1
@@ -50,12 +49,6 @@ namespace McPeak.Media.Aquos
         {
             get { return new InputSelectionCommand(Selection.Video2); }
         }
-
-        public override string ToString()
-        {
-            return string.Format("{0}{1}", COMMAND_STR, (int) _selection).PadRight(8);
-        }
-
 
         private enum Selection
         {
