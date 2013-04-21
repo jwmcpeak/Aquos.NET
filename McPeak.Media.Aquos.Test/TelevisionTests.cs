@@ -7,8 +7,19 @@ namespace McPeak.Media.Aquos.Test
     public class TelevisionTests
     {
         [TestMethod]
-        public void TestMethod1()
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void ShouldThrowOutofRangeExceptionTooHigh()
         {
+            var tv = new Television("", 10);
+            tv.Volume = 61;
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void ShouldThrowOutofRangeExceptionTooLow()
+        {
+            var tv = new Television("", 10);
+            tv.Volume = -1;
         }
     }
 }

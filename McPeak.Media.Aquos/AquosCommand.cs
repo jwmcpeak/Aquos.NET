@@ -7,8 +7,10 @@ namespace McPeak.Media.Aquos
 {
     public class AquosCommand
     {
-        protected const int COMMAND_MAX_LENGTH = 4;
-        protected const int PARAM_MAX_LENGTH = 4;
+        protected const int CommandMaxLength = 4;
+        protected const int ParamMaxLength = 4;
+
+        private const string VolumeCommandStr = "VOLM";
 
         protected string Cmd;
         protected string Parms;
@@ -22,23 +24,23 @@ namespace McPeak.Media.Aquos
 
             if (string.IsNullOrEmpty(parameters))
             {
-                parameters = string.Empty.PadRight(PARAM_MAX_LENGTH);
+                parameters = string.Empty.PadRight(ParamMaxLength);
             }
 
             command = command.Trim();
 
-            if (command.Length > COMMAND_MAX_LENGTH)
+            if (command.Length > CommandMaxLength)
             {
                 throw new ArgumentException("Command cannot be more than four characters");
             }
 
-            if (parameters.Length > PARAM_MAX_LENGTH)
+            if (parameters.Length > ParamMaxLength)
             {
                 throw new ArgumentException("Command parameters cannot be more than four characters");
             }
 
             Cmd = command;
-            Parms = parameters;
+            Parms = parameters.PadRight(ParamMaxLength);
         }
 
         public override string ToString()
@@ -46,6 +48,7 @@ namespace McPeak.Media.Aquos
             return string.Format("{0}{1}", Cmd, Parms);
         }
 
+        #region Equality Testing
         public override bool Equals(object obj)
         {
             return Equals(obj as AquosCommand);
@@ -84,6 +87,14 @@ namespace McPeak.Media.Aquos
         public static bool operator !=(AquosCommand a, AquosCommand b)
         {
             return !(a == b);
+        } 
+        #endregion
+
+        #region Creation Methods
+        public static AquosCommand Volume(int value)
+        {
+            return new AquosCommand(VolumeCommandStr, Convert.ToString(value));
         }
+        #endregion
     }
 }

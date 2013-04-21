@@ -18,10 +18,10 @@ namespace McPeak.Media.Aquos
             {
                 if (value > MAX_VOLUME || value < 0)
                 {
-                    throw new IndexOutOfRangeException("Volume can only be between 0 and 60");
+                    throw new ArgumentOutOfRangeException("Volume can only be between 0 and 60", new Exception());
                 }
 
-                var volumeCommand = VolumeCommand.Volume(value);
+                var volumeCommand = AquosCommand.Volume(value);
 
                 IssueCommand(volumeCommand);
             }

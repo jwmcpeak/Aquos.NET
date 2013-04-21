@@ -12,7 +12,7 @@ namespace McPeak.Media.Aquos
         private InputSelectionCommand(Selection selection)
             : base(COMMAND_STR)
         {
-            Parms = Convert.ToString((int) selection).PadRight(PARAM_MAX_LENGTH);
+            Parms = Convert.ToString((int) selection).PadRight(ParamMaxLength);
         }
 
         public static InputSelectionCommand Hdmi1
