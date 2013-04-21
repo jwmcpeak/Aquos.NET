@@ -13,6 +13,7 @@ namespace McPeak.Media.Aquos
         private const string VolumeCommandStr = "VOLM";
         private const string InputSelectionCommandStr = "IAVD";
         private const string AvModeSelectionCommandStr = "AVMD";
+        private const string PowerSettingCommandStr = "POWR";
 
         protected string Cmd;
         protected string Parms;
@@ -24,17 +25,19 @@ namespace McPeak.Media.Aquos
                 throw new ArgumentNullException("command");
             }
 
-            if (string.IsNullOrEmpty(parameters))
-            {
-                parameters = string.Empty.PadRight(ParamMaxLength);
-            }
-
             command = command.Trim();
 
             if (command.Length > CommandMaxLength)
             {
                 throw new ArgumentException("Command cannot be more than four characters");
             }
+
+            if (string.IsNullOrEmpty(parameters))
+            {
+                parameters = string.Empty;
+            }
+
+            parameters = parameters.Trim();
 
             if (parameters.Length > ParamMaxLength)
             {
@@ -106,14 +109,17 @@ namespace McPeak.Media.Aquos
 
         public static AquosCommand Input(InputSelection selection)
         {
-            int value = (int) selection;
-            return new AquosCommand(InputSelectionCommandStr, value);
+            return new AquosCommand(InputSelectionCommandStr, (int)selection);
         }
 
         public static AquosCommand AvMode(AvModeSelection selection)
         {
-            int value = (int) selection;
-            return new AquosCommand(AvModeSelectionCommandStr, value);
+            return new AquosCommand(AvModeSelectionCommandStr, (int)selection);
+        }
+
+        public static AquosCommand Power(PowerSetting setting)
+        {
+            return new AquosCommand(PowerSettingCommandStr, (int) setting);
         }
         #endregion
     }
