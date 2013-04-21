@@ -21,9 +21,19 @@ namespace McPeak.Media.Aquos
                     throw new ArgumentOutOfRangeException("Volume can only be between 0 and 60", new Exception());
                 }
 
-                var volumeCommand = AquosCommand.Volume(value);
+                var cmd = AquosCommand.Volume(value);
 
-                IssueCommand(volumeCommand);
+                IssueCommand(cmd);
+            }
+        }
+
+        public InputSelection Input
+        {
+            set
+            {
+                var cmd = AquosCommand.SelectInput(value);
+
+                IssueCommand(cmd);
             }
         }
 

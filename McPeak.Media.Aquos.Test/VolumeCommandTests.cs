@@ -40,18 +40,6 @@ namespace McPeak.Media.Aquos.Test
             Assert.AreNotEqual(AquosCommand.Volume(30), AquosCommand.Volume(31));
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
-        public void ShouldThrowOutofRangeExceptionTooHigh()
-        {
-            AquosCommand.Volume(61);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
-        public void ShouldThrowOutofRangeExceptionTooLow()
-        {
-            AquosCommand.Volume(-1);
-        }
+       
     }
 }

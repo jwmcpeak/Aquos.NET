@@ -11,6 +11,7 @@ namespace McPeak.Media.Aquos
         protected const int ParamMaxLength = 4;
 
         private const string VolumeCommandStr = "VOLM";
+        private const string InputSelectionCommandStr = "IAVD";
 
         protected string Cmd;
         protected string Parms;
@@ -41,6 +42,12 @@ namespace McPeak.Media.Aquos
 
             Cmd = command;
             Parms = parameters.PadRight(ParamMaxLength);
+        }
+
+        protected AquosCommand(string command, int value)
+            : this(command, Convert.ToString(value))
+        {
+            
         }
 
         public override string ToString()
@@ -93,7 +100,13 @@ namespace McPeak.Media.Aquos
         #region Creation Methods
         public static AquosCommand Volume(int value)
         {
-            return new AquosCommand(VolumeCommandStr, Convert.ToString(value));
+            return new AquosCommand(VolumeCommandStr, value);
+        }
+
+        public static AquosCommand SelectInput(InputSelection selection)
+        {
+            int value = (int) selection;
+            return new AquosCommand(InputSelectionCommandStr, value);
         }
         #endregion
     }
