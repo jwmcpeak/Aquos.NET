@@ -7,22 +7,21 @@ namespace McPeak.Media.Aquos
 {
     public class Television
     {
-        public string IPAddress { get; set; }
+        public string IpAddress { get; set; }
         public int Port { get; set; }
 
-        private const int MAX_VOLUME = 60;
+        private const int MaxVolume = 60;
 
         public int Volume
         {
             set
             {
-                if (value > MAX_VOLUME || value < 0)
+                if (value > MaxVolume || value < 0)
                 {
                     throw new ArgumentOutOfRangeException("Volume can only be between 0 and 60", new Exception());
                 }
 
                 var cmd = AquosCommand.Volume(value);
-
                 IssueCommand(cmd);
             }
         }
@@ -31,8 +30,16 @@ namespace McPeak.Media.Aquos
         {
             set
             {
-                var cmd = AquosCommand.SelectInput(value);
+                var cmd = AquosCommand.Input(value);
+                IssueCommand(cmd);
+            }
+        }
 
+        public AvModeSelection AvMode
+        {
+            set
+            {
+                var cmd = AquosCommand.AvMode(value);
                 IssueCommand(cmd);
             }
         }

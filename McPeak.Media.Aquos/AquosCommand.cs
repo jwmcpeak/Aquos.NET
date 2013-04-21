@@ -12,6 +12,7 @@ namespace McPeak.Media.Aquos
 
         private const string VolumeCommandStr = "VOLM";
         private const string InputSelectionCommandStr = "IAVD";
+        private const string AvModeSelectionCommandStr = "AVMD";
 
         protected string Cmd;
         protected string Parms;
@@ -103,10 +104,16 @@ namespace McPeak.Media.Aquos
             return new AquosCommand(VolumeCommandStr, value);
         }
 
-        public static AquosCommand SelectInput(InputSelection selection)
+        public static AquosCommand Input(InputSelection selection)
         {
             int value = (int) selection;
             return new AquosCommand(InputSelectionCommandStr, value);
+        }
+
+        public static AquosCommand AvMode(AvModeSelection selection)
+        {
+            int value = (int) selection;
+            return new AquosCommand(AvModeSelectionCommandStr, value);
         }
         #endregion
     }
