@@ -54,6 +54,7 @@
     <Compile Include="TelevisionTests.cs" />
     <Compile Include="AvModeTests.cs" />
     <Compile Include="AquosCommandTests.cs" />
+    <Compile Include="PowerCommandTests.cs" />
     <Compile Include="VolumeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

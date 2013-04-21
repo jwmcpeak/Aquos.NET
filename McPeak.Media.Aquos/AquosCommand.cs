@@ -10,15 +10,15 @@ namespace McPeak.Media.Aquos
         protected const int CommandMaxLength = 4;
         protected const int ParamMaxLength = 4;
 
-        private const string VolumeCommandStr = "VOLM";
-        private const string InputSelectionCommandStr = "IAVD";
-        private const string AvModeSelectionCommandStr = "AVMD";
-        private const string PowerSettingCommandStr = "POWR";
+        public const string VolumeCommand = "VOLM";
+        public const string InputSelectionCommand = "IAVD";
+        public const string AvModeSelectionCommand = "AVMD";
+        public const string PowerSettingCommand = "POWR";
 
-        protected string Cmd;
-        protected string Parms;
+        public string Command { get; private set; }
+        public string Parameter { get; private set; }
 
-        protected AquosCommand(string command, string parameters = null)
+        public AquosCommand(string command, string parameters = null)
         {
             if (string.IsNullOrEmpty(command))
             {
@@ -44,11 +44,11 @@ namespace McPeak.Media.Aquos
                 throw new ArgumentException("Command parameters cannot be more than four characters");
             }
 
-            Cmd = command;
-            Parms = parameters.PadRight(ParamMaxLength);
+            Command = command;
+            Parameter = parameters.PadRight(ParamMaxLength);
         }
 
-        protected AquosCommand(string command, int value)
+        public AquosCommand(string command, int value)
             : this(command, Convert.ToString(value))
         {
             
@@ -56,10 +56,10 @@ namespace McPeak.Media.Aquos
 
         public override string ToString()
         {
-            return string.Format("{0}{1}", Cmd, Parms);
+            return string.Format("{0}{1}", Command, Parameter);
         }
 
-        #region Equality Testing
+        #region Equality
         public override bool Equals(object obj)
         {
             return Equals(obj as AquosCommand);
@@ -104,22 +104,22 @@ namespace McPeak.Media.Aquos
         #region Creation Methods
         public static AquosCommand Volume(int value)
         {
-            return new AquosCommand(VolumeCommandStr, value);
+            return new AquosCommand(VolumeCommand, value);
         }
 
         public static AquosCommand Input(InputSelection selection)
         {
-            return new AquosCommand(InputSelectionCommandStr, (int)selection);
+            return new AquosCommand(InputSelectionCommand, (int) selection);
         }
 
         public static AquosCommand AvMode(AvModeSelection selection)
         {
-            return new AquosCommand(AvModeSelectionCommandStr, (int)selection);
+            return new AquosCommand(AvModeSelectionCommand, (int) selection);
         }
 
         public static AquosCommand Power(PowerSetting setting)
         {
-            return new AquosCommand(PowerSettingCommandStr, (int) setting);
+            return new AquosCommand(PowerSettingCommand, (int) setting);
         }
         #endregion
     }

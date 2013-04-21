@@ -39,6 +39,7 @@
     <Compile Include="AquosCommand.cs" />
     <Compile Include="AvModeSelection.cs" />
     <Compile Include="InputSelection.cs" />
+    <Compile Include="PowerSetting.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Television.cs" />
   </ItemGroup>
