@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace McPeak.Media.Aquos.Test
 {
     [TestClass]
-    public class VolumeCommandTests
+    public class VolumeTests
     {
         [TestMethod]
         public void CommandOutputIsEightCharacters()
